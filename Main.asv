@@ -1,0 +1,10 @@
+clear all
+
+topography = (xlsread('uiuc.xlsx')-1)*-1;
+
+%%Parameters
+cover = sum(topography(:)==1) % Number of non-building spaces to be covered
+k = 50
+
+
+imshow(top);
