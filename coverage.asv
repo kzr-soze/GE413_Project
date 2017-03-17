@@ -10,8 +10,6 @@ function [ output_args ] = coverage( routers,topography,range )
     for i = 1:k
         x = round(routers(k,1));
         y = round(routers(k,2));
-        frontier(x,y) = 1;
-        distances(x,y) = 0;
         
         % Initialize the frontier around each router
         % left and top left diagonal
@@ -70,8 +68,7 @@ function [ output_args ] = coverage( routers,topography,range )
             end
         end
         
-        disp(distances);
-        disp(frontier);
+        disp(
                 
         
         
