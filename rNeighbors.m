@@ -8,7 +8,7 @@ function [frontier,distances] = rNeighbors(topography,range,distances,frontier,p
     dist = distances(x,y);
     [m,n] = size(topography);
     frontier(x,y) = -1; % Mark point as out of range
-    if(dist < range)
+    if(dist <= range)
         frontier(x,y) = 1; % Mark point as explored
         if (x-1 >= 1)
             if (topography(x-1,y) < 1 && distances(x-1,y) > 1 + dist) 
@@ -41,12 +41,12 @@ function [frontier,distances] = rNeighbors(topography,range,distances,frontier,p
         if (x+1 <= m)
             if (topography(x+1,y) < 1 && distances(x+1,y) > dist+1)
                 frontier(x+1,y) = 0;
-                distances(x+1,y) = 1;
+                distances(x+1,y) = dist+1;
             end
             if (y+1 <= n)
                 if (topography(x+1,y+1) < 1 && distances(x+1,y+1) > dist + sqrt(2))
                     frontier(x+1,y+1) = 0;
-                    distances(x+1,y+1) = sqrt(2);
+                    distances(x+1,y+1) = dist+sqrt(2);
                 end
             end
         end
@@ -55,12 +55,12 @@ function [frontier,distances] = rNeighbors(topography,range,distances,frontier,p
         if (y+1 <= n)
             if (topography(x,y+1) < 1 && distances(x,y+1) > dist + 1)
                 frontier(x,y+1) = 0;
-                distances(x,y+1) = 1;
+                distances(x,y+1) = dist+1;
             end
             if (x-1 >= 1)
                 if (topography(x-1,y+1) < 1 && distances(x-1,y+1) > dist+sqrt(2))
                     frontier(x-1,y+1) = 0;
-                    distances(x-1,y+1) = sqrt(2);
+                    distances(x-1,y+1) = dist+sqrt(2);
                 end
             end
         end

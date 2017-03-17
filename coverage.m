@@ -2,14 +2,17 @@ function [ output_args ] = coverage( routers,topography,range )
 %Determines which squares in topgraphy are covered by a router using
 %   Dijkstra's algorithm.
     k = size(routers,1);
+    disp(k);
     [m,n] = size(topography);
     frontier = zeros(m,n)-1;
     distances = zeros(m,n)+m*n;
     
     % Find all nodes within distance range of each router
     for i = 1:k
-        x = round(routers(k,1));
-        y = round(routers(k,2));
+        disp(i)
+        x = round(routers(i,1));
+        y = round(routers(i,2));
+        disp([x,y]);
         frontier(x,y) = 1;
         distances(x,y) = 0;
         
@@ -70,7 +73,7 @@ function [ output_args ] = coverage( routers,topography,range )
             end
         end
         
-        while (~isempty(frontier(:)==0))
+        while (sum(frontier(:)==0)>0)
             logical = frontier==0;
             front = logical.*distances;
             point = [-1,-1];
