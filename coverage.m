@@ -4,7 +4,7 @@ function [ output_args ] = coverage( routers,topography,range )
     k = size(routers,1);
     [m,n] = size(topography);
     frontier = zeros(m,n)-1;
-    distances = zeros(m,n)+Inf;
+    distances = zeros(m,n)+m*n;
     
     % Find all nodes within distance range of each router
     for i = 1:k
@@ -70,15 +70,29 @@ function [ output_args ] = coverage( routers,topography,range )
             end
         end
         
-        disp(distances);
-        disp(frontier);
-                
-        
-        
-        
-        
-    end
-    
-
+        while (~isempty(frontier(:)==0))
+            logical = frontier==0;
+            front = logical.*distances;
+            point = [-1,-1];
+            M = intmax;
+            
+            for l=1:m % Find smallest element in frontier
+                for j=1:n
+                    if (front(l,j) > 0 && front(l,j) < M)
+                        point = [l,j];
+                        M = front(l,j);
+                    end
+                end
+            end
+            disp(M)
+            disp(frontier)
+            disp(distances)
+            if (M < intmax)
+                [frontier,distances] = rNeighbors(topography,range,distances,frontier,point);         
+            end
+        end
+    end  
+    disp(distances);
+    disp(frontier);
 end
 
