@@ -7,8 +7,8 @@ function [cost] = routerCost(routers,topography,costAdj,distPenalty)
     N = size(routers,1);
     cost = 0;
     for k = 1:N
-        x = routers(k,1);
-        y = routers(k,2);
+        x = round(routers(k,1));
+        y = round(routers(k,2));
         go = true;
         if (x-1 >= 1)
             if (topography(x-1,y) == 1)
