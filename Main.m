@@ -13,7 +13,7 @@ topography = uiuc_topo_qtr;
 % Number of nodes to cover (0 and 2)
 cover = sum(topography(:)==0)+sum(topography(:)==2);  
 [m,n] = size(topography);       % Dimensions of topography                 
-k = 100;                         % Number of routers
+k = 5;                         % Number of routers
 range = 8;                      % Range broadcast range 
 factor = .5;                    % Scalar to determine if high-service areas are covered
 costAdj = 1;                    % Cost of placing a router adjacent to a building
@@ -42,6 +42,14 @@ end
 %% Run coverage
 % Function coverage returns which squares are covered (frontier matrix, 1
 % and -1 values) and the distance/strength of the coverage at each node.
+
+w = 1;
+cvr = @(routers) -w*squaresCovered(routers,topography,range,factor) %+ (1-w)*routerCost(routers,topography,costAdj,distPenalty);
+
+options = optimset('Display','iter','DiffMinChange',1);
+
+[routers,fval] = fminunc(cvr,routers,options);
+
 [frontier,distances] = coverage(routers,topography,range);
 
 % Draw covered radii around each router in blue.
@@ -75,8 +83,6 @@ imshow(img);
 
 % Anonymous function in order to pass the topography into objective
 % function separate from the router positions.
-% cvr = @(x) coverage(x,topgraphy)
-
 
         
 

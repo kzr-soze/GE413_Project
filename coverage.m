@@ -10,9 +10,16 @@ function [frontier,distances] = coverage( routers,topography,range )
     
     % Find all nodes within distance range of each router
     for i = 1:k
-        disp(['Router: ',num2str(i)]);
+        % disp(['Router: ',num2str(i)]);
         x = round(routers(i,1));
         y = round(routers(i,2));
+%         x = routers(i,1);
+%         y = routers(i,2);
+%         xup = ceil(routers(i,1));
+%         yup = ceil(routers(i,2));
+%         xdown = floor(routers(i,1));
+%         ydown = floor(routers(i,1)); 
+        
         frontier(x,y) = 1;
         distances(x,y) = 0;
         
