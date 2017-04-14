@@ -46,7 +46,7 @@ function [frontier,distances] = coverage( routers,topography,range )
         end
         
         % Right and bottom right diagonal
-        if (x+1 >= 1)
+        if (x+1 >= m)
             if (topography(x+1,y) ~= 1)
                 frontier(x+1,y) = 0;
                 distances(x+1,y) = 1;
@@ -65,7 +65,7 @@ function [frontier,distances] = coverage( routers,topography,range )
                 frontier(x,y+1) = 0;
                 distances(x,y+1) = 1;
             end
-            if (x-1 >= 0)
+            if (x-1 >= 1)
                 if (topography(x-1,y+1) ~= 1)
                     frontier(x-1,y+1) = 0;
                     distances(x-1,y+1) = sqrt(2);
