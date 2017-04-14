@@ -1,8 +1,8 @@
 %% main.m
 clear all; clc; close all;
 
-load map_prep/uiuc_topo.mat;
-topography = uiuc_topo;
+load map_prep/uiuc_topo_qtr.mat;
+topography = uiuc_topo_qtr;
 % Topography matrix values: 
 % -1 no service
 % 0  general space
@@ -13,11 +13,11 @@ topography = uiuc_topo;
 % Number of nodes to cover (0 and 2)
 cover = sum(topography(:)==0)+sum(topography(:)==2);  
 [m,n] = size(topography);       % Dimensions of topography                 
-k = 50;                         % Number of routers
-range = 13;                     % Range broadcast range 
+k = 100;                         % Number of routers
+range = 8;                      % Range broadcast range 
 factor = .5;                    % Scalar to determine if high-service areas are covered
-costAdj = 1;
-distPenalty = 2;
+costAdj = 1;                    % Cost of placing a router adjacent to a building
+distPenalty = 2;                % penalty factor for placing routers non-adjacent to a building
 
 % Map is 2.15 km east-west, 2 km north-south.
 % Router range is 0.09144 km (300 ft).
