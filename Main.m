@@ -24,20 +24,8 @@ distPenalty = 2;                % penalty factor for placing routers non-adjacen
 % Each node space is 0.0028 km, so router range should be ~32 spaces on the
 % base map of 734x758 nodes.
 
-%% Initial router position initialization
-% Randomly initialize router positions, then check that they are on open
-% spaces.
-routers = [randi(m,k,1),randi(n,k,1)];
-index = 1;
-while index <= k
-    t = topography(routers(index,1),routers(index,2));
-    if (t == 0 || t == 2)
-        index = index + 1;
-    else
-        routers(index,1) = randi(m);
-        routers(index,2) = randi(n);
-    end
-end
+% Create random router locations
+routers = deployRandRouters(topography, k);
 
 %% Run coverage
 % Function coverage returns which squares are covered (frontier matrix, 1
@@ -48,7 +36,7 @@ cvr = @(routers) -w*squaresCovered(routers,topography,range,factor) %+ (1-w)*rou
 
 options = optimset('Display','iter','DiffMinChange',1);
 
-[routers,fval] = fminunc(cvr,routers,options);
+% [routers,fval] = fminunc(cvr,routers,options);
 
 [frontier,distances] = coverage(routers,topography,range);
 
@@ -56,7 +44,7 @@ options = optimset('Display','iter','DiffMinChange',1);
 img = topo2rgb(topography);
 for i=1:m
     for j=1:n
-        if (frontier(i,j) == 1)
+        if (fnew(i,j) == 1)
             img(i,j,1) = 0;
             img(i,j,2) = 0;
             img(i,j,3) = 1;
@@ -84,13 +72,15 @@ imshow(img);
 % Anonymous function in order to pass the topography into objective
 % function separate from the router positions.
 
-%% Run GA on vector placement
-LB = [0 0]';
-UB = [m n]';
+%% Run GA on router placement to maximize coverage
+objfun = @(rtr) -1*squaresCovered(rtr, topography, range, factor);
+LB = ones(1, 2*k);
+UB = [m*ones(1,k), n*ones(1,k)];
 IntCon = [1 1]';
-options = optimoptions(@ga, 
+options = optimoptions(@ga, ... %'UseVectorized', true, ...
+    'InitialPopulationMatrix', routers, 'Display', 'iter', ...
+    'PopulationSize', 20);
+nvars = 2*k;
+
 [x,fval,exitflag,output,population,scores] = ...
-    ga(, 2,[],[],[],[],LB,UB,[],IntCon);
-
-
-%imshow(top);
+    ga(objfun, nvars,[],[],[],[],LB,UB,[], IntCon, options);
