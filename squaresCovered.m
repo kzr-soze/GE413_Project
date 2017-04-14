@@ -1,6 +1,10 @@
-function [ adequate ] = squaresCovered( routers,topography,range,factor )
+function [adequate] = squaresCovered( routersv,topography,range,factor )
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
+
+    % Reshape vector input for routers into k x 2 matrix
+    k = numel(routersv) / 2;
+    routers = reshape(routersv, [k 2]);
 
     [frontier,distances] = coverage(routers,topography,range);
     [m,n] = size(topography);
