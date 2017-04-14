@@ -1,6 +1,8 @@
 function [frontier,distances] = coverage( routers,topography,range )
-%Determines which squares in topgraphy are covered by a router using
-%   Dijkstra's algorithm.
+% FUNCTION COVERAGE
+% Determines which squares in topgraphy are covered by a router using
+% Dijkstra's algorithm. Outputs:
+% frontier: m by n matrix 
     k = size(routers,1);
     [m,n] = size(topography);
     frontier = zeros(m,n)-1;

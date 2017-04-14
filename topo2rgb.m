@@ -1,5 +1,5 @@
 function [topocolor] = topo2rgb(topo)
-% FUNCTION TOPO2COLOR
+% FUNCTION TOPO2RGB
 % Accepts the UIUC topography matrix, which has values of -1, 0, 1, and 2
 % to denote service areas.
 % Converts to RGB colors for easy use with imshow
