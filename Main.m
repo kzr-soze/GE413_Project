@@ -11,9 +11,11 @@ topography = uiuc_topo;
 %%Parameters
 cover = sum(topography(:)==0)+sum(topography(:)==2);  % Number of non-building spaces to be covered
 [m,n] = size(topography);       % Dimensions of topography
-k = 50;                         % Number of routers
+k = 3;                         % Number of routers
 range = 13;                     
 factor = .5;                    % Scalar to determine if high-service areas are covered
+costAdj = 1;
+distPenalty = 2;
 
 % Randomly initialize router positions, then check that they are on open
 % spaces.
@@ -55,6 +57,7 @@ for i = 1:m
 end
 disp([num2str(adequate),' of ',num2str(cover),' areas covered'])
 disp([num2str(100*adequate/cover),'% coverage!']);
+disp(['Cost: $',num2str(routerCost(routers,topography,costAdj,distPenalty))]);
 
 imshow(img);
 
