@@ -38,7 +38,7 @@ function [cost] = routerCost(routers,topography,costAdj,distPenalty)
         end
         
         % Right and bottom right diagonal
-        if (x+1 >= 1 && go)
+        if (x+1 <= m && go)
             if (topography(x+1,y) == 1)
                 cost = cost + costAdj;
                 go = false;
@@ -57,7 +57,7 @@ function [cost] = routerCost(routers,topography,costAdj,distPenalty)
                 cost = cost + costAdj;
                 go = false;
             end
-            if (x-1 >= 0 && go)
+            if (x-1 >= 1 && go)
                 if (topography(x-1,y+1) == 1)
                     cost = cost + costAdj;
                     go = false;
