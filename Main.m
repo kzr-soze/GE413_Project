@@ -16,8 +16,8 @@ cover = sum(topography(:)==0)+sum(topography(:)==2);
 k = 50;                         % Number of routers
 range = 13;                     % Range broadcast range 
 factor = .5;                    % Scalar to determine if high-service areas are covered
-costAdj = 1;
-distPenalty = 2;
+costAdj = 1;                    % Cost of placing a router adjacent to a building
+distPenalty = 2;                % penalty factor for placing routers non-adjacent to a building
 
 % Map is 2.15 km east-west, 2 km north-south.
 % Router range is 0.09144 km (300 ft).
