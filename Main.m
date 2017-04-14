@@ -84,7 +84,13 @@ imshow(img);
 % Anonymous function in order to pass the topography into objective
 % function separate from the router positions.
 
-        
+%% Run GA on vector placement
+LB = [0 0]';
+UB = [m n]';
+IntCon = [1 1]';
+options = optimoptions(@ga, 
+[x,fval,exitflag,output,population,scores] = ...
+    ga(, 2,[],[],[],[],LB,UB,[],IntCon);
 
 
 %imshow(top);
