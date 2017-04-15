@@ -1,0 +1,353 @@
+% 150 routers. went from 9352 random to 9933.
+>> 9352/cover
+
+ans =
+
+    0.6483
+
+>> 9933/cover
+
+ans =
+
+    0.6886
+
+>> [x,fval,exitflag,output,population,scores] = ...
+    ga(objfun, nvars,[],[],[],[],LB,UB,[], IntCon, options);
+
+                                  Best          Mean         Stall
+Generation      Func-count     Penalty         Penalty    Generations
+    1               40           -9352           -6922        0
+    2               60           -9352           -6993        1
+    3               80           -9352           -7631        2
+    4              100           -9354           -8183        0
+    5              120           -9354           -8522        1
+    6              140           -9356           -8743        0
+    7              160           -9356           -9081        1
+    8              180           -9372           -9294        0
+    9              200           -9372           -8981        1
+   10              220           -9374           -9086        0
+   11              240           -9374           -9039        1
+   12              260           -9374           -9176        2
+   13              280           -9374           -8992        3
+   14              300           -9379           -9372        0
+   15              320           -9379           -8893        1
+   16              340           -9390           -9195        0
+   17              360           -9390           -8883        1
+   18              380           -9394           -9315        0
+   19              400           -9394           -9364        1
+   20              420           -9397           -9376        0
+   21              440           -9398           -9346        0
+   22              460           -9400           -9361        0
+   23              480           -9400           -9352        1
+   24              500           -9402           -9370        0
+   25              520           -9402           -9138        1
+   26              540           -9402           -8873        2
+   27              560           -9402           -9393        3
+   28              580           -9402           -9124        4
+   29              600           -9402           -9339        5
+
+                                  Best          Mean         Stall
+Generation      Func-count     Penalty         Penalty    Generations
+   30              620           -9402           -9286        6
+   31              640           -9402           -8841        7
+   32              660           -9402           -9353        8
+   33              680           -9402           -9019        9
+   34              700           -9402           -9364       10
+   35              720           -9402           -9330       11
+   36              740           -9402           -9160       12
+   37              760           -9402           -9388       13
+   38              780           -9402           -9400       14
+   39              800           -9404           -9384        0
+   40              820           -9406           -9135        0
+   41              840           -9406           -9233        1
+   42              860           -9406           -9209        2
+   43              880           -9408           -9362        0
+   44              900           -9410           -9402        0
+   45              920           -9410           -9403        1
+   46              940           -9410           -9404        2
+   47              960           -9410           -9354        3
+   48              980           -9411           -9375        0
+   49             1000           -9411           -9154        1
+   50             1020           -9411           -9349        2
+   51             1040           -9411           -8946        3
+   52             1060           -9411           -8675        4
+   53             1080           -9411           -9387        5
+   54             1100           -9411           -9394        6
+   55             1120           -9411           -9353        7
+   56             1140           -9411           -8866        8
+   57             1160           -9416           -9227        0
+   58             1180           -9453           -9329        0
+   59             1200           -9453           -8832        1
+
+                                  Best          Mean         Stall
+Generation      Func-count     Penalty         Penalty    Generations
+   60             1220           -9478           -9426        0
+   61             1240           -9478           -9400        1
+   62             1260           -9503           -9205        0
+   63             1280           -9503           -9385        1
+   64             1300           -9517           -9472        0
+   65             1320           -9521           -9151        0
+   66             1340           -9521           -9498        1
+   67             1360           -9531           -9477        0
+   68             1380           -9551           -9376        0
+   69             1400           -9580           -9102        0
+   70             1420           -9589           -9523        0
+   71             1440           -9591           -9094        0
+   72             1460           -9621           -9534        0
+   73             1480           -9630           -9585        0
+   74             1500           -9646           -9588        0
+   75             1520           -9656           -9507        0
+   76             1540           -9656           -9619        1
+   77             1560           -9656           -9491        2
+   78             1580           -9661           -9543        0
+   79             1600           -9697           -9631        0
+   80             1620           -9697           -9646        1
+   81             1640           -9697           -9654        2
+   82             1660           -9702           -9225        0
+   83             1680           -9711           -9669        0
+   84             1700           -9742           -8832        0
+   85             1720           -9742           -9427        1
+   86             1740           -9742           -9694        2
+   87             1760           -9742           -9680        3
+   88             1780           -9759           -9225        0
+   89             1800           -9766           -9627        0
+
+                                  Best          Mean         Stall
+Generation      Func-count     Penalty         Penalty    Generations
+   90             1820           -9770           -9280        0
+   91             1840           -9781           -9598        0
+   92             1860           -9785           -8985        0
+   93             1880           -9785           -9571        1
+   94             1900           -9785           -8933        2
+   95             1920           -9804           -9694        0
+   96             1940           -9804           -9561        1
+   97             1960           -9823           -9650        0
+   98             1980           -9823           -9430        1
+   99             2000           -9823           -9720        2
+  100             2020           -9823           -9457        3
+  101             2040           -9841           -9312        0
+  102             2060           -9842           -9465        0
+  103             2080           -9850           -9646        0
+  104             2100           -9870           -9707        0
+  105             2120           -9870           -9317        1
+  106             2140           -9870           -9832        2
+  107             2160           -9887           -9849        0
+  108             2180           -9887           -9864        1
+  109             2200           -9887           -9085        2
+  110             2220           -9888           -9868        0
+  111             2240           -9888           -9726        1
+  112             2260           -9890           -9613        0
+  113             2280           -9890           -9697        1
+  114             2300           -9894           -9873        0
+  115             2320           -9898           -9477        0
+  116             2340           -9898           -9528        1
+  117             2360           -9898           -9735        2
+  118             2380           -9899           -9364        0
+  119             2400           -9903           -9503        0
+
+                                  Best          Mean         Stall
+Generation      Func-count     Penalty         Penalty    Generations
+  120             2420           -9903           -9648        1
+  121             2440           -9903           -9742        2
+  122             2460           -9907           -9542        0
+  123             2480           -9907           -9899        1
+  124             2500           -9909           -9881        0
+  125             2520           -9909           -9746        1
+  126             2540           -9911           -9541        0
+  127             2560           -9911           -9766        1
+  128             2580           -9913           -9818        0
+  129             2600           -9913           -9810        1
+  130             2620           -9918           -9483        0
+  131             2640           -9918           -9911        1
+  132             2660           -9927           -9909        0
+  133             2680           -9927           -9895        1
+  134             2700           -9928           -9577        0
+  135             2720           -9928           -9832        1
+  136             2740           -9928           -9921        2
+  137             2760           -9928           -9923        3
+  138             2780           -9928           -9723        4
+  139             2800           -9928           -9507        5
+  140             2820           -9928           -9744        6
+  141             2840           -9928           -9386        7
+  142             2860           -9928           -9896        8
+  143             2880           -9928           -9928        9
+  144             2900           -9928           -9850       10
+  145             2920           -9928           -9877       11
+  146             2940           -9928           -9902       12
+  147             2960           -9928           -9917       13
+  148             2980           -9928           -9777       14
+  149             3000           -9928           -9822       15
+
+                                  Best          Mean         Stall
+Generation      Func-count     Penalty         Penalty    Generations
+  150             3020           -9928           -9614       16
+  151             3040           -9929           -9927        0
+  152             3060           -9929           -9783        1
+  153             3080           -9929           -9823        2
+  154             3100           -9929           -9347        3
+  155             3120           -9929           -9886        4
+  156             3140           -9929           -9908        5
+  157             3160           -9929           -9898        6
+  158             3180           -9929           -9354        7
+  159             3200           -9929           -9883        8
+  160             3220           -9929           -9924        9
+  161             3240           -9929           -9924       10
+  162             3260           -9929           -9620       11
+  163             3280           -9929           -9624       12
+  164             3300           -9929           -9847       13
+  165             3320           -9929           -9840       14
+  166             3340           -9929           -9890       15
+  167             3360           -9929           -9814       16
+  168             3380           -9929           -9912       17
+  169             3400           -9929           -9926       18
+  170             3420           -9929           -9575       19
+  171             3440           -9929           -9608       20
+  172             3460           -9929           -9907       21
+  173             3480           -9929           -9922       22
+  174             3500           -9929           -9926       23
+  175             3520           -9929           -9634       24
+  176             3540           -9929           -9454       25
+  177             3560           -9929           -9888       26
+  178             3580           -9929           -9897       27
+  179             3600           -9929           -9924       28
+
+                                  Best          Mean         Stall
+Generation      Func-count     Penalty         Penalty    Generations
+  180             3620           -9929           -9815       29
+  181             3640           -9929           -9826       30
+  182             3660           -9929           -9807       31
+  183             3680           -9929           -9849       32
+  184             3700           -9929           -9905       33
+  185             3720           -9929           -9920       34
+  186             3740           -9929           -9870       35
+  187             3760           -9929           -9533       36
+  188             3780           -9929           -9869       37
+  189             3800           -9929           -9919       38
+  190             3820           -9929           -9499       39
+  191             3840           -9929           -9738       40
+  192             3860           -9929           -9877       41
+  193             3880           -9929           -9564       42
+  194             3900           -9930           -9904        0
+  195             3920           -9933           -9881        0
+  196             3940           -9933           -9853        1
+  197             3960           -9933           -9513        2
+  198             3980           -9933           -9883        3
+  199             4000           -9933           -9929        4
+  200             4020           -9933           -9238        5
+  201             4040           -9933           -9776        6
+  202             4060           -9933           -9897        7
+  203             4080           -9933           -9901        8
+  204             4100           -9933           -9930        9
+  205             4120           -9933           -9931       10
+  206             4140           -9933           -9931       11
+  207             4160           -9933           -9929       12
+  208             4180           -9933           -9430       13
+  209             4200           -9933           -9837       14
+
+                                  Best          Mean         Stall
+Generation      Func-count     Penalty         Penalty    Generations
+  210             4220           -9933           -9633       15
+  211             4240           -9933           -9765       16
+  212             4260           -9933           -9780       17
+  213             4280           -9933           -9531       18
+  214             4300           -9933           -9782       19
+  215             4320           -9933           -9842       20
+  216             4340           -9933           -9902       21
+  217             4360           -9933           -9793       22
+  218             4380           -9933           -9930       23
+  219             4400           -9933           -9931       24
+  220             4420           -9933           -9556       25
+  221             4440           -9933           -9873       26
+  222             4460           -9933           -9925       27
+  223             4480           -9933           -9931       28
+  224             4500           -9933           -9925       29
+  225             4520           -9933           -9699       30
+  226             4540           -9933           -9894       31
+  227             4560           -9933           -9720       32
+  228             4580           -9933           -9481       33
+  229             4600           -9933           -9909       34
+  230             4620           -9933           -9558       35
+  231             4640           -9933           -9803       36
+  232             4660           -9933           -9822       37
+  233             4680           -9933           -9928       38
+  234             4700           -9933           -9795       39
+  235             4720           -9933           -9924       40
+  236             4740           -9933           -9174       41
+  237             4760           -9933           -9928       42
+  238             4780           -9933           -9786       43
+  239             4800           -9933           -9905       44
+
+                                  Best          Mean         Stall
+Generation      Func-count     Penalty         Penalty    Generations
+  240             4820           -9933           -9895       45
+  241             4840           -9933           -9788       46
+  242             4860           -9933           -9743       47
+  243             4880           -9933           -9898       48
+  244             4900           -9933           -9827       49
+  245             4920           -9933           -9860       50
+Optimization terminated: average change in the penalty fitness value less than options.FunctionTolerance
+and constraint violation is less than options.ConstraintTolerance.
+Exception in thread "AWT-EventQueue-0" java.lang.ArrayIndexOutOfBoundsException: 1
+	at sun.awt.Win32GraphicsEnvironment.getDefaultScreenDevice(Unknown Source)
+	at com.mathworks.mwswing.SystemGraphicsEnvironment.getDefaultScreenDevice(SystemGraphicsEnvironment.java:28)
+	at com.mathworks.mwswing.WindowUtils.getScreenBounds(WindowUtils.java:543)
+	at com.mathworks.mwswing.WindowUtils.getVirtualScreenBounds(WindowUtils.java:580)
+	at com.mathworks.widgets.desk.DTFrame$LocationTracker.componentResized(DTFrame.java:1416)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.AWTEventMulticaster.componentResized(Unknown Source)
+	at java.awt.Component.processComponentEvent(Unknown Source)
+	at java.awt.Component.processEvent(Unknown Source)
+	at java.awt.Container.processEvent(Unknown Source)
+	at java.awt.Window.processEvent(Unknown Source)
+	at com.mathworks.mwswing.MJFrame.processEvent(MJFrame.java:872)
+	at java.awt.Component.dispatchEventImpl(Unknown Source)
+	at java.awt.Container.dispatchEventImpl(Unknown Source)
+	at java.awt.Window.dispatchEventImpl(Unknown Source)
+	at java.awt.Component.dispatchEvent(Unknown Source)
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+	at java.awt.EventQueue.access$200(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.awt.EventQueue$3.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.awt.EventQueue$4.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+	at java.awt.EventDispatchThread.run(Unknown Source)
+>> 

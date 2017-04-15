@@ -13,8 +13,10 @@ topography = uiuc_topo_qtr;
 % Number of nodes to cover (0 and 2)
 cover = sum(topography(:)==0)+sum(topography(:)==2);  
 [m,n] = size(topography);       % Dimensions of topography                 
+
 k = 130;                         % Number of routers
 range = 8;                      % Range broadcast range 
+
 factor = .5;                    % Scalar to determine if high-service areas are covered
 costAdj = 1;                    % Cost of placing a router adjacent to a building
 distPenalty = 2;                % penalty factor for placing routers non-adjacent to a building
@@ -33,6 +35,7 @@ for i = 2:pop
 end
 
 %% Run coverage
+
 % Function coverage returns which squares are covered (frontier matrix, 1
 % and -1 values) and the distance/strength of the coverage at each node.
 
@@ -43,36 +46,7 @@ end
 % 
 % % [routers,fval] = fminunc(cvr,routers,options);
 % 
-% [frontier,distances] = coverage(routers,topography,range);
 
-% Draw covered radii around each router in blue.
-% img = topo2rgb(topography);
-% for i=1:m
-%     for j=1:n
-%         if (fnew(i,j) == 1)
-%             img(i,j,1) = 0;
-%             img(i,j,2) = 0;
-%             img(i,j,3) = 1;
-%         end
-%     end
-% end
-% 
-% %% Calculate percent cover
-% adequate = 0; % total points with adequate coverage. 
-% for i = 1:m
-%     for j = 1:n
-%         if (topography(i,j) == 0 && distances(i,j) <= range)
-%             adequate = adequate + 1;
-%         elseif (topography(i,j) == 2 && distances(i,j) <= (factor*range))
-%             adequate = adequate + 1;
-%         end
-%     end
-% end
-% disp([num2str(adequate),' of ',num2str(cover),' areas covered'])
-% disp([num2str(100*adequate/cover),'% coverage!']);
-% disp(['Cost: $',num2str(routerCost(routers,topography,costAdj,distPenalty))]);
-% 
-% imshow(img);
 
 % Anonymous function in order to pass the topography into objective
 % function separate from the router positions.
@@ -90,10 +64,11 @@ nvars = 2*k;
 [x,fval,exitflag,output,population,scores] = ...
     ga(objfun, nvars,[],[],[],[],LB,UB,[], IntCon, options);
 
-x = reshape(x,[k 2]);
-[frontier,distances] = coverage(x,topography,range);
+rnew = reshape(x,[k 2]);
+[frontier,distances] = coverage(rnew,topography,range);
 
 % Draw covered radii around each router in blue.
+
 img = topo2rgb(topography);
 for i=1:m
     for j=1:n
@@ -106,6 +81,7 @@ for i=1:m
 end
 
 %% Calculate percent cover
+
 adequate = 0; % total points with adequate coverage. 
 for i = 1:m
     for j = 1:n
@@ -121,3 +97,4 @@ disp([num2str(100*adequate/cover),'% coverage!']);
 disp(['Cost: $',num2str(routerCost(x,topography,costAdj,distPenalty))]);
 
 imshow(img);
+
