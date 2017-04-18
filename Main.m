@@ -1,6 +1,8 @@
 %% main.m
 clear all; clc; close all;
 
+format long;
+
 load map_prep/uiuc_topo_qtr.mat;
 topography = uiuc_topo_qtr;
 % Topography matrix values: 
@@ -14,14 +16,15 @@ topography = uiuc_topo_qtr;
 cover = sum(topography(:)==0)+sum(topography(:)==2);  
 [m,n] = size(topography);       % Dimensions of topography                 
 
-k = 130;                         % Number of routers
+k = 250;                         % Number of routers
 range = 8;                      % Range broadcast range 
 
 factor = .5;                    % Scalar to determine if high-service areas are covered
 costAdj = 1;                    % Cost of placing a router adjacent to a building
 distPenalty = 2;                % penalty factor for placing routers non-adjacent to a building
-pop = 20;
-generations = 100;              % maximum number of generations
+pop = 20;                       % population for GA
+generations = 100;              % maximum number of generations for GA
+maxStall = 25;                  % maximum number of stalled generations for GA
 
 % Map is 2.15 km east-west, 2 km north-south.
 % Router range is 0.09144 km (300 ft).
@@ -58,7 +61,8 @@ UB = [m*ones(1,k), n*ones(1,k)];
 IntCon = [1 1]';
 options = optimoptions(@ga, ... %'UseVectorized', true, ...
     'InitialPopulationMatrix', routers, 'Display', 'iter', ...
-    'PopulationSize', pop, 'MaxGenerations',generations);
+    'PopulationSize', pop, 'MaxGenerations',generations,'MaxStallGenerations',...
+    maxStall);
 nvars = 2*k;
 
 [x,fval,exitflag,output,population,scores] = ...
@@ -72,7 +76,11 @@ rnew = reshape(x,[k 2]);
 img = topo2rgb(topography);
 for i=1:m
     for j=1:n
-        if (frontier(i,j) == 1)
+        if (frontier(i,j) == 1 && topography(i,j) ~= 2)
+            img(i,j,1) = 0;
+            img(i,j,2) = 0;
+            img(i,j,3) = 1;
+        elseif (frontier(i,j) == 1 && distances(i,j) <= range*factor)
             img(i,j,1) = 0;
             img(i,j,2) = 0;
             img(i,j,3) = 1;
@@ -94,7 +102,7 @@ for i = 1:m
 end
 disp([num2str(adequate),' of ',num2str(cover),' areas covered'])
 disp([num2str(100*adequate/cover),'% coverage!']);
-disp(['Cost: $',num2str(routerCost(x,topography,costAdj,distPenalty))]);
+disp(['Cost: $',num2str(routerCost(rnew,topography,costAdj,distPenalty))]);
 
 imshow(img);
 
