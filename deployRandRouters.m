@@ -1,4 +1,4 @@
-function [routers] = deployRandRouters(topography, k)
+function [routers] = deployRandRouters(topography, k,algo)
 %% Function deployRandRouters
 % Initial router position initialization
 % Randomly initialize router positions, then check that they are on open
@@ -21,7 +21,16 @@ while index <= k
     end
 end
 
-% Turn into row vector
-routers = routersmat(:)';
-
+if (algo == 1)
+    % Turn into row vector
+    routers = routersmat(:)';
+elseif (algo == 2)
+    routers = [routersmat(1,1);routersmat(1,2)];
+    for index = 2:k
+        routers = [routers;routersmat(index,1);routersmat(index,2)];
+    end
+    routers = routers';
+else
+    error('Invalid algorithm choice');
+end
 end
