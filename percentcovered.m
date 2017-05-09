@@ -1,11 +1,20 @@
-function [ output_args ] = percentcovered( file,topography,factor,range,costAdj,distPenalty )
+function [ output_args ] = percentcovered( file,topography,factor,range,costAdj,distPenalty,algo)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
+
     cover = 14425;
     [m,n] = size(topography);
     filename = ['results/',file];
     temp = (load(filename));
     rnew = temp.x;
+    k = size(rnew,2)/2;
+    disp(k);
+    if (algo==1)
+        rnew = reshape(rnew,[k 2]);
+    elseif (algo==2)
+        rnew = reshape(rnew,[2,k])';
+    end
+    
     [frontier,distances] = coverage(rnew,topography,range);
     
     adequate = 0; % total points with adequate coverage. 
