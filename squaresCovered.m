@@ -1,6 +1,7 @@
 function [adequate] = squaresCovered( routersv,topography,range,factor,algo )
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
+%squaresCovered: Calculates the number of cells in the topography matrix
+%which receive adequate coverage. Initializes the covered areas around each
+%router, then calls coverage to calculate the full value.
 
     % Reshape vector input for routers into k x 2 matrix
     k = numel(routersv) / 2;
@@ -11,7 +12,7 @@ function [adequate] = squaresCovered( routersv,topography,range,factor,algo )
     else
         error('Invalid algorithm');
     end
-    %routers = round(routers);
+
     [frontier,distances] = coverage(routers,topography,range);
     [m,n] = size(topography);
     

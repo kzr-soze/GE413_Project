@@ -1,6 +1,9 @@
 function [frontier,distances] = rNeighbors(topography,range,distances,frontier,point)
-%UNTITLED4 Summary of this function goes here
-%   Detailed explanation goes here
+%rNeighbors: For a given point, finds the distance of the shortest path of
+%   all non-building nodes to that point, out to nodes which are a maximum
+%   distance of range from point. Does so using a modified version of
+%   Dijkstra's Algorithm
+
     % left and top left diagonal
     x = point(1);
     y = point(2);

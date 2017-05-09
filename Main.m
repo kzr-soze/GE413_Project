@@ -1,7 +1,15 @@
 %% main.m
+% Our main script. For parameters given inside, it initializes a population
+% of random router placements and implements a genetic algorithm to
+% maximize the amount of coverage they provide based on their placement.
+% The algorithm used is specified by algo.
+
+
 clear all; clc; close all;
 
 format long;
+
+tic;
 
 load map_prep/uiuc_topo_qtr.mat;
 topography = uiuc_topo_qtr;
@@ -27,7 +35,7 @@ pop = 20;                       % population for GA
 generations = 100;              % maximum number of generations for GA
 maxStall = 25;                  % maximum number of stalled generations for GA
 
-algo = 2;
+algo = 2;                       % Specifies which representation of routers to use in column vector
 
 % Map is 2.15 km east-west, 2 km north-south.
 % Router range is 0.09144 km (300 ft).
@@ -40,29 +48,13 @@ for i = 2:pop
     routers = [routers;deployRandRouters(topography,k,algo)];
 end
 
-%% Run coverage
-
-% Function coverage returns which squares are covered (frontier matrix, 1
-% and -1 values) and the distance/strength of the coverage at each node.
-
-% w = 1;
-% cvr = @(routers) -w*squaresCovered(routers,topography,range,factor) %+ (1-w)*routerCost(routers,topography,costAdj,distPenalty);
-% 
-% options = optimset('Display','iter','DiffMinChange',1);
-% 
-% % [routers,fval] = fminunc(cvr,routers,options);
-% 
-
-
-% Anonymous function in order to pass the topography into objective
-% function separate from the router positions.
 
 %% Run GA on router placement to maximize coverage
 if (algo == 1)
     objfun = @(rtr) -1*squaresCovered(rtr, topography, range, factor,algo);
     LB = ones(1, 2*k);
     UB = [m*ones(1,k), n*ones(1,k)];
-    IntCon = [1 1]';
+    IntCon = []';
 elseif (algo == 2)
     objfun = @(rtr) -1*squaresCovered(rtr, topography, range, factor,algo);
     LB = ones(1, 2*k);
@@ -72,6 +64,7 @@ elseif (algo == 2)
         UB = [UB,m,n];
     end
 end
+
 options = optimoptions(@ga, ... %'UseVectorized', true, ...
     'InitialPopulationMatrix', routers, 'Display', 'iter', ...
     'PopulationSize', pop, 'MaxGenerations',generations,'MaxStallGenerations',...
@@ -80,6 +73,8 @@ nvars = 2*k;
 
 [x,fval,exitflag,output,population,scores] = ...
     ga(objfun, nvars,[],[],[],[],LB,UB,[], IntCon, options);
+
+% Reshape final vector into more natural matrix shape
 if (algo==1)
     rnew = reshape(x,[k 2]);
 elseif (algo==2)
@@ -122,6 +117,8 @@ end
 disp([num2str(adequate),' of ',num2str(cover),' areas covered'])
 disp([num2str(100*adequate/cover),'% coverage!']);
 disp(['Cost: $',num2str(routerCost(rnew,topography,costAdj,distPenalty))]);
+disp(['Elapsed Computational Time: ',num2str(toc),' seconds']);
+
 
 imshow(img);
 
