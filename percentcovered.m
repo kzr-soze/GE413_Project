@@ -1,6 +1,7 @@
 function [ output_args ] = percentcovered( file,topography,factor,range,costAdj,distPenalty,algo)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+%percentcovered: loads a router placement from a file and calculates the
+%   percent of the topography it covers for the other given parameters.
+%   Operates on the quarter-size topography.
 
     cover = 14425;
     [m,n] = size(topography);
