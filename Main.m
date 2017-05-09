@@ -17,7 +17,7 @@ cover = sum(topography(:)==0)+sum(topography(:)==2);
 disp(cover);
 [m,n] = size(topography);       % Dimensions of topography                 
 
-k = 250;                         % Number of routers
+k = 350;                         % Number of routers
 range = 8;                      % Range broadcast range 
 
 factor = .5;                    % Scalar to determine if high-service areas are covered
