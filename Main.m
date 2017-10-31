@@ -11,8 +11,11 @@ format long;
 
 tic;
 
-load map_prep/uiuc_topo_qtr.mat;
-topography = uiuc_topo_qtr;
+load loop;
+topography = loop;
+
+load traffic;
+PT = traffic;
 % Topography matrix values: 
 % -1 no service
 % 0  general space
@@ -20,22 +23,32 @@ topography = uiuc_topo_qtr;
 % 2  high service
 
 %% Initialize Parameters
+
+[m,n] = size(topography);      % Dimensions of topography                 
 % Number of nodes to cover (0 and 2)
-cover = sum(topography(:)==0)+sum(topography(:)==2); 
+cover = 0;
+for i = 1:m
+    for j = 1:n
+        if (topography(i,j) == 0 || topography(i,j) == 2)
+            cover = cover + PT(i,j);
+        end
+    end
+end 
 disp(cover);
-[m,n] = size(topography);       % Dimensions of topography                 
+k = 6;                         % Number of routers
+range = 25;                    % Range broadcast range 
 
-k = 350;                         % Number of routers
-range = 8;                      % Range broadcast range 
 
-factor = .5;                    % Scalar to determine if high-service areas are covered
-costAdj = 1;                    % Cost of placing a router adjacent to a building
-distPenalty = 2;                % penalty factor for placing routers non-adjacent to a building
-pop = 20;                       % population for GA
-generations = 100;              % maximum number of generations for GA
-maxStall = 25;                  % maximum number of stalled generations for GA
+TrafficLimit = 35;           % Limit on router capacity
+ScaleFactor = (1000*3)/(600);            %Estimate number of cells for each street
+factor = .5;                   % Scalar to determine if high-service areas are covered
+costAdj = 1;                   % Cost of placing a router adjacent to a building
+distPenalty = 2;               % penalty factor for placing routers non-adjacent to a building
+pop = 2;                       % population for GA
+generations = 1;               % maximum number of generations for GA
+maxStall = 25;                 % maximum number of stalled generations for GA
 
-algo = 2;                       % Specifies which representation of routers to use in column vector
+algo = 2;                      % Specifies which representation of routers to use in column vector
 
 % Map is 2.15 km east-west, 2 km north-south.
 % Router range is 0.09144 km (300 ft).
@@ -51,12 +64,12 @@ end
 
 %% Run GA on router placement to maximize coverage
 if (algo == 1)
-    objfun = @(rtr) -1*squaresCovered(rtr, topography, range, factor,algo);
+    objfun = @(rtr) -1*squaresCovered(rtr, topography, range, factor, algo, PT, TrafficLimit, ScaleFactor);
     LB = ones(1, 2*k);
     UB = [m*ones(1,k), n*ones(1,k)];
     IntCon = []';
 elseif (algo == 2)
-    objfun = @(rtr) -1*squaresCovered(rtr, topography, range, factor,algo);
+    objfun = @(rtr) -1*squaresCovered(rtr, topography, range, factor, algo, PT, TrafficLimit, ScaleFactor);
     LB = ones(1, 2*k);
     UB = [m,n];
     IntCon = [];
@@ -80,7 +93,7 @@ if (algo==1)
 elseif (algo==2)
     rnew = reshape(x,[2,k])';
 end
-[frontier,distances] = coverage(rnew,topography,range);
+[frontier,distances,tr] = coverage(rnew,topography,range, PT, TrafficLimit, ScaleFactor);
 
 % Draw covered radii around each router in blue.
 
@@ -106,9 +119,9 @@ adequate = 0; % total points with adequate coverage.
 for i = 1:m
     for j = 1:n
         if (topography(i,j) == 0 && distances(i,j) <= range)
-            adequate = adequate + 1;
+            adequate = adequate + PT(i,j);
         elseif (topography(i,j) == 2 && distances(i,j) <= (factor*range))
-            adequate = adequate + 1;
+            adequate = adequate + PT(i,j);
         end
     end
 end

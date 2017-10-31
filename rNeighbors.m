@@ -1,4 +1,4 @@
-function [frontier,distances] = rNeighbors(topography,range,distances,frontier,point)
+function [frontier,distances,tr] = rNeighbors(topography,range,distances,frontier,point, PT, TrafficLimit, ScaleFactor, tr,i)
 %rNeighbors: For a given point, finds the distance of the shortest path of
 %   all non-building nodes to that point, out to nodes which are a maximum
 %   distance of range from point. Does so using a modified version of
@@ -7,12 +7,13 @@ function [frontier,distances] = rNeighbors(topography,range,distances,frontier,p
     % left and top left diagonal
     x = point(1);
     y = point(2);
-    
+    traf = tr(i)+ScaleFactor*PT(x,y);
     dist = distances(x,y);
     [m,n] = size(topography);
     frontier(x,y) = -1; % Mark point as out of range
-    if(dist <= range)
+    if(dist <= range && traf<=TrafficLimit)
         frontier(x,y) = 1; % Mark point as explored
+        tr(i) = traf;
         if (x-1 >= 1)
             if (topography(x-1,y) ~= 1 && distances(x-1,y) > 1 + dist) 
                 frontier(x-1,y) = 0;

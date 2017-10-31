@@ -1,4 +1,4 @@
-function [adequate] = squaresCovered( routersv,topography,range,factor,algo )
+function [adequate] = squaresCovered( routersv,topography,range,factor, algo, PT, TrafficLimit, ScaleFactor )
 %squaresCovered: Calculates the number of cells in the topography matrix
 %which receive adequate coverage. Initializes the covered areas around each
 %router, then calls coverage to calculate the full value.
@@ -13,16 +13,16 @@ function [adequate] = squaresCovered( routersv,topography,range,factor,algo )
         error('Invalid algorithm');
     end
 
-    [frontier,distances] = coverage(routers,topography,range);
+    [frontier,distances,tr] = coverage(routers,topography,range, PT, TrafficLimit, ScaleFactor);
     [m,n] = size(topography);
     
     adequate = 0; % total points with adequate coverage. 
     for i = 1:m
         for j = 1:n
             if (topography(i,j) == 0 && distances(i,j) <= range)
-                adequate = adequate + 1;
+                adequate = adequate + PT(i,j);
             elseif (topography(i,j) == 2 && distances(i,j) <= (factor*range))
-                adequate = adequate + 1;
+                adequate = adequate + PT(i,j);
             end
         end
     end
