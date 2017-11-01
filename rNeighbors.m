@@ -7,7 +7,11 @@ function [frontier,distances,tr] = rNeighbors(topography,range,distances,frontie
     % left and top left diagonal
     x = point(1);
     y = point(2);
-    traf = tr(i)+ScaleFactor*PT(x,y);
+    if(topography(x,y) ~= -1)
+        traf = tr(i)+ScaleFactor*PT(x,y);
+    else
+        traf = tr(i);
+    end
     dist = distances(x,y);
     [m,n] = size(topography);
     frontier(x,y) = -1; % Mark point as out of range
