@@ -35,8 +35,8 @@ for i = 1:m
     end
 end 
 disp(cover);
-k = 6;                         % Number of routers
-range = 25;                    % Range broadcast range 
+k = 10;                         % Number of routers
+range = 7;                    % Range broadcast range 
 
 
 TrafficLimit = 35;           % Limit on router capacity
@@ -44,8 +44,8 @@ ScaleFactor = (1000*3)/(600);            %Estimate number of cells for each stre
 factor = .5;                   % Scalar to determine if high-service areas are covered
 costAdj = 1;                   % Cost of placing a router adjacent to a building
 distPenalty = 2;               % penalty factor for placing routers non-adjacent to a building
-pop = 2;                       % population for GA
-generations = 1;               % maximum number of generations for GA
+pop = 50;                       % population for GA
+generations = 200;               % maximum number of generations for GA
 maxStall = 25;                 % maximum number of stalled generations for GA
 
 algo = 2;                      % Specifies which representation of routers to use in column vector
