@@ -16,7 +16,7 @@ function [frontier,distances,tr] = coverage( routers,topography,range, PT, Traff
         y = round(routers(i,2));
         frontier(x,y) = 1;
         distances(x,y) = 0;
-        tr(i) = tr(i) + + ScaleFactor*PT(x,y);
+        tr(i) = tr(i) + ScaleFactor*PT(x,y);
         
         % Initialize the frontier around each router
         % left and top left diagonal
