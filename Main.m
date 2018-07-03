@@ -14,8 +14,8 @@ tic;
 load loop;
 topography = loop;
 
-load traffic2;
-PT = traffic2;
+load traffic;
+PT = traffic;
 % Topography matrix values: 
 % -1 no service
 % 0  general space
